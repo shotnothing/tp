@@ -12,8 +12,67 @@ public class Price implements Comparable<Price> {
 
     public static final String MESSAGE_INVALID_PRICE = "Price should"
             + "only be a nonegative number, with two or less decimal points (can also have no decimals)";
-    public final double value;
+    public enum PriceCategory {
+        CHEAP(10, "$"),
+        MODERATE(20, "$$"),
+        EXPENSIVE(40, "$$$"),
+        LUXURY(Integer.MAX_VALUE, "$$$$");
 
+        private final int maxValue;
+        private final String symbol;
+
+        /**
+         * Constructs a {@code PriceCategory}.
+         * 
+         * @param maxValue the maximum value of the price category
+         * @param symbol   the symbol of the price category
+         */
+        PriceCategory(int maxValue, String symbol) {
+            this.maxValue = maxValue;
+            this.symbol = symbol;
+        }
+
+        /**
+         * Returns the symbol of the price category.
+         * 
+         * @return the symbol of the price category
+         */
+        public String getSymbol() {
+            return symbol;
+        }
+
+        /**
+         * Returns true if the symbol is part of a price category.
+         * 
+         * @param symbol the symbol to check
+         * @return true if the symbol is part of a price category
+         */
+        public static boolean containsSymbol(String symbol) {
+            for (PriceCategory category : PriceCategory.values()) {
+                if (category.symbol.equals(symbol)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /**
+         * Returns the price category based on the value of the price.
+         * 
+         * @param value the value of the price
+         * @return the price category
+         */
+        public static String getPriceCategoryString(double value) {
+            for (PriceCategory category : PriceCategory.values()) {
+                if (value <= category.maxValue) {
+                    return category.getSymbol();
+                }
+            }
+            throw new IllegalArgumentException("Invalid price value: " + value);
+        }
+    }
+    public final double value;
+    
     /**
      * Constructs a {@code Price}.
      *
@@ -37,15 +96,7 @@ public class Price implements Comparable<Price> {
      * @return
      */
     public String getPriceCategoryString() {
-        if (this.value <= 10) {
-            return "$";
-        } else if (this.value <= 20) {
-            return "$$";
-        } else if (this.value <= 40) {
-            return "$$$";
-        } else {
-            return "$$$$";
-        }
+        return PriceCategory.getPriceCategoryString(value);
     }
 
     /**

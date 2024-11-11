@@ -41,9 +41,9 @@ public class RestaurantTest {
         editedAlice = new RestaurantBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameRestaurant(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
         Restaurant editedBob = new RestaurantBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameRestaurant(editedBob));
+        assertTrue(BOB.isSameRestaurant(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";

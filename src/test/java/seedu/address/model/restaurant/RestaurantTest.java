@@ -32,9 +32,9 @@ public class RestaurantTest {
         // null -> returns false
         assertFalse(ALICE.isSameRestaurant(null));
 
-        // same name, all other attributes different -> returns true
+        // same name and address, all other attributes different -> returns true
         Restaurant editedAlice = new RestaurantBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameRestaurant(editedAlice));
 
         // different name, all other attributes same -> returns false

@@ -42,7 +42,7 @@ public class UniqueRestaurantListTest {
     @Test
     public void contains_restaurantWithSameIdentityFieldsInList_returnsTrue() {
         uniqueRestaurantList.add(ALICE);
-        Restaurant editedAlice = new RestaurantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Restaurant editedAlice = new RestaurantBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueRestaurantList.contains(editedAlice));
     }

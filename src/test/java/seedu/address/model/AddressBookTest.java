@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalRestaurants.ALICE;
@@ -46,7 +47,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateRestaurants_throwsDuplicateRestaurantException() {
         // Two restaurants with the same identity fields
-        Restaurant editedAlice = new RestaurantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Restaurant editedAlice = new RestaurantBuilder(ALICE).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Restaurant> newRestaurants = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newRestaurants);
@@ -73,7 +74,7 @@ public class AddressBookTest {
     @Test
     public void hasRestaurant_restaurantWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addRestaurant(ALICE);
-        Restaurant editedAlice = new RestaurantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Restaurant editedAlice = new RestaurantBuilder(ALICE).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasRestaurant(editedAlice));
     }
